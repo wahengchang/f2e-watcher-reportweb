@@ -3,5 +3,6 @@ coverage
 build
 public
 .DS_Store
+coverage
 dist
 public
