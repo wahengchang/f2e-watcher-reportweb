@@ -15,7 +15,7 @@ const FileDetailRow = ({file}) => {
 
 const FilesDetail = ({files}) => {
   return <span className={classNames(style['tooltiptext'])}>
-            {files.map( file => <FileDetailRow file={file} />)}
+            {files.map( (file, index) => <FileDetailRow key={index} file={file} />)}
         </span>
 }
 
@@ -29,7 +29,7 @@ const ReportRow = ({re, res}) => {
           <td>{re.httpResponseTime/1000 + 's'}</td>
           <td  className={classNames(style['tooltip'])}>
               <span className={classNames(style['tooltipTitle'])}>
-                {re.headerReceivedCount + ' files'}
+                {res.files.length + ' files'}
               </span>
               <FilesDetail files={res.files} />
           </td>
@@ -90,7 +90,8 @@ const Report = ({report, resource }) => {
       <table className={classNames(style['tftable'])}>
         <tbody>
           <ReportHeader />
-          {report.map(_re => <ReportRow 
+          {report.map( (_re, index) => <ReportRow 
+            key={index} 
             re={_re} 
             res={_res.filter(__res => __res.url === _re.url)[0]}
           />)}
